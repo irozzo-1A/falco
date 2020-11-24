@@ -951,7 +951,7 @@ int falco_init(int argc, char **argv)
 			hawk_lifecycle->watch_rules(
 					(hawk_watch_rules_cb)rules_cb,
 					reinterpret_cast<hawk_engine *>(&engine_blueprint),
-					"hawk_example_c");
+					"hawk_example_go");
 		});
 
 		if(print_support)
@@ -1387,6 +1387,8 @@ int falco_init(int argc, char **argv)
 		inspector->close();
 		// engine->print_stats();
 		sdropmgr.print_stats();
+
+		hawk_lifecycle->stop();
 		if(watchrules_thread.joinable())
 		{
 			watchrules_thread.join();
@@ -1403,6 +1405,7 @@ int falco_init(int argc, char **argv)
 	catch(exception &e)
 	{
 		display_fatal_err("Runtime error: " + string(e.what()) + ". Exiting.\n");
+		hawk_lifecycle->stop();
 		if(watchrules_thread.joinable())
 		{
 			watchrules_thread.join();
