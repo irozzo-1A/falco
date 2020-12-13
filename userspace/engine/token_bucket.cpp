@@ -19,11 +19,20 @@ limitations under the License.
 #include <sys/time.h>
 
 #include "token_bucket.h"
-#include "utils.h"
+#include <chrono>
 #include "banned.h" // This raises a compilation error when certain functions are used
 
+// get_monotonic_clock_time_ns returns the monotonic clock time in ns.
+// Note that the returned value is only useful for computing the elapsed time
+// between two intervals, it should ne be interpreted as real time.
+uint64_t get_monotonic_clock_time_ns() {
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(
+            std::chrono::steady_clock::now().time_since_epoch())
+            .count();
+}
+
 token_bucket::token_bucket():
-	token_bucket(sinsp_utils::get_current_time_ns)
+	token_bucket(get_monotonic_clock_time_ns)
 {
 }
 
