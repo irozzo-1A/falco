@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 #define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_ENABLE_BENCHMARKING
 #define CATCH_CONFIG_CONSOLE_WIDTH 300
 #include <catch.hpp>
 
