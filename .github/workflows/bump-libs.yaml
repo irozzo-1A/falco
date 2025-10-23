@@ -11,6 +11,9 @@ concurrency:
   group: bump-libs-ci
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   bump-libs:
     runs-on: ubuntu-latest

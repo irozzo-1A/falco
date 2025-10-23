@@ -1,6 +1,7 @@
 name: StaticAnalysis
 on:
   pull_request:
+
 permissions:  
   contents: read
 
